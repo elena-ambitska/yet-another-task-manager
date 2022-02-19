@@ -3,19 +3,16 @@ import React from 'react';
 import {
     Route,
     Routes,
-    BrowserRouter, Link
+    BrowserRouter
 } from "react-router-dom";
 import Register from "./components/register";
 import Dashboard from "./components/dashboard";
 import Login from "./components/login";
-console.log('Dashboard', Dashboard)
+import Header from "./components/header";
+
 const App = () => {
     return  ( <BrowserRouter>
-        <ul>
-            <li><Link to="/">Dashboard</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
-        </ul>
+        <Header />
 
         <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -25,5 +22,5 @@ const App = () => {
         </Routes>
     </BrowserRouter>);
 }
-console.log('document.getElementById(\'app\')', document.getElementById('app'))
+
 ReactDOM.render(<App />, document.getElementById('app'));
