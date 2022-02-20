@@ -1,28 +1,13 @@
-class UserService {
-    #domain = 'https://radiant-temple-07706.herokuapp.com/';
+import BaseService from "./BaseService";
+
+class UserService extends BaseService {
 
     async register(data) {
-        const response = await fetch(`${this.#domain}auth/local/register`, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        return await response.json();
+        return this.post(`auth/local/register`, data);
     }
 
     async login(data) {
-        const response = await fetch(`${this.#domain}auth/local`, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        return await response.json();
+        return this.post(`auth/local`, data);
     }
 }
 
