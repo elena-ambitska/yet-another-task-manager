@@ -24,41 +24,48 @@ function Login() {
             } else {
                 setServerErrors(result.message[0].messages);
             }
-            console.log('result', result);
-
         }).catch((error) => {
             console.log('error', error);
         });
     }
 
     return (<article className="grid">
-        <h1>Login</h1>
         <form onSubmit={handleSubmit}>
-            <label>
-                Email
+            <h1>Login</h1>
+
+            <div className="mb-3">
+                <label htmlFor="loginInput" className="form-label">Email</label>
+
                 <input
                     name="identifier"
                     type="text"
                     required=""
+                    className="form-control"
                     onChange={changeFieldValue}
                     value={fields.identifier}
+                    id="loginInput"
                 />
-            </label>
-            <label>
-                Password
+            </div>
+
+            <div className="mb-3">
+                <label htmlFor="passwordInput" className="form-label">Password</label>
+
                 <input name="password"
                        type="password"
                        required=""
                        onChange={changeFieldValue}
                        value={fields.password}
+                       className="form-control"
+                       id="passwordInput"
                 />
-            </label>
+            </div>
 
-            <button>Login</button>
+            <button className="btn btn-primary">Login</button>
         </form>
-        <ul>
+
+        <ul className="mt-2">
             {serverErrors.map((error) => {
-                return (<li key={error.id}>{error.message}</li>);
+                return (<li className="alert alert-danger" key={error.id}>{error.message}</li>);
             })}
         </ul>
     </article>)

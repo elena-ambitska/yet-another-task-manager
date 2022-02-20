@@ -5,7 +5,7 @@ function Dashboard() {
     const [taskList, setTaskList] = useState([]);
 
     useEffect( () => {
-        taskService.list().then((list) => {
+        taskService.getCards().then((list) => {
             setTaskList(list)
         })
     }, []);

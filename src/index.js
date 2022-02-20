@@ -10,16 +10,20 @@ import Dashboard from "./components/dashboard";
 import Login from "./components/login";
 import Header from "./components/header";
 
+import './styles/index.css'
+
 const App = () => {
     return  ( <BrowserRouter>
         <Header />
 
-        <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="" element={<Dashboard />} />
-            <Route path="register" element={<Register />} />
-            <Route path="login" element={<Login />} />
-        </Routes>
+        <div className="container">
+            <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="" element={<Dashboard />} />
+                <Route path="register" element={<Register />} />
+                <Route path="login" element={<Login />} />
+            </Routes>
+        </div>
     </BrowserRouter>);
 }
 

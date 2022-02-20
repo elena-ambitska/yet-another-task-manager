@@ -3,13 +3,17 @@ import useLocalStorage from "../hooks/useLocalStorage";
 class BaseService {
     #domain = 'https://radiant-temple-07706.herokuapp.com/';
 
-    getHeaders() {
-        const [user, setUser] = useLocalStorage('user', null);
-
-        return {
-            Authorization: 'Bearer ' + user.jwt,
+    getHeaders(withAuth=true) {
+        const user = JSON.parse(window.localStorage.getItem('user'));
+        const headers = {
             'Content-Type': 'application/json',
+        };
+
+        if (withAuth && user) {
+            headers['Authorization'] = 'Bearer ' + user.jwt;
         }
+
+        return headers;
     }
 
     async get(path) {
@@ -42,11 +46,11 @@ class BaseService {
         return await response.json();
     }
 
-    async post(path, data) {
+    async post(path, data, withAuth=true) {
         const response = await fetch(this.#domain + path, {
             method: "POST",
             body: JSON.stringify(data),
-            headers: this.getHeaders()
+            headers: this.getHeaders(withAuth)
         });
 
         return await response.json();

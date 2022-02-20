@@ -41,60 +41,66 @@ const Register = () => {
     }
 
     return (
-        <article className="grid">
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name
+        <article className="grid" >
+
+            <form onSubmit={handleSubmit} >
+                <h2>Register</h2>
+                <div className="mb-3">
+                <label htmlFor="nameInput" className="form-label"> Name</label>
                     <input
                         name="login"
                         required=""
                         onChange={changeFieldValue}
                         value={fields.login}
+                        className="form-control"
+                        id="nameInput"
                     />
-                </label>
-                <label>
-                    Email
+
+                </div>
+                <div className="mb-3">
+                <label htmlFor="emailInput" className="form-label"> Email</label>
                     <input
                         name="email"
                         type="email"
                         required=""
                         onChange={changeFieldValue}
                         value={fields.email}
+                        className="form-control"
+                        id="emailInput"
                     />
-                </label>
-                <label>
-                    Password
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="passwordInput" className="form-label">Password</label>
                     <input name="password"
                            type="password"
                            required=""
                            onChange={changeFieldValue}
                            value={fields.password}
+                           className="form-control"
+                           id="passwordInput"
                     />
-                </label>
-                <label>
-                    Password Confirm
+                </div>
+                <div className="mb-3">
+                <label htmlFor="passwordConfirmInput" className="form-label"> Password Confirm</label>
                     <input name="retype"
                            type="password"
                            required=""
                            onChange={changeFieldValue}
                            value={fields.retype}
+                           className="form-control"
+                           id="passwordConfirmInput"
                     />
-                </label>
-
-                <button>Register</button>
-                <div className="text-right">
-                    <my-router-link href="/login">Login</my-router-link>
                 </div>
+                <button className="btn btn-primary">Register</button>
             </form>
             <ul>
                 {serverErrors.map((error) => {
-                    return (<li key={error.id}>{error.message}</li>);
+                    return (<li className="alert alert-danger" key={error.id}>{error.message}</li>);
                 })}
             </ul>
         </article>
     )
-
+І
 }
 
 export default Register;
