@@ -49,7 +49,7 @@ const Register = () => {
                 <label htmlFor="nameInput" className="form-label"> Name</label>
                     <input
                         name="login"
-                        required=""
+                        required
                         onChange={changeFieldValue}
                         value={fields.login}
                         className="form-control"
@@ -62,7 +62,7 @@ const Register = () => {
                     <input
                         name="email"
                         type="email"
-                        required=""
+                        required
                         onChange={changeFieldValue}
                         value={fields.email}
                         className="form-control"
@@ -73,7 +73,7 @@ const Register = () => {
                     <label htmlFor="passwordInput" className="form-label">Password</label>
                     <input name="password"
                            type="password"
-                           required=""
+                           required
                            onChange={changeFieldValue}
                            value={fields.password}
                            className="form-control"
@@ -84,7 +84,7 @@ const Register = () => {
                 <label htmlFor="passwordConfirmInput" className="form-label"> Password Confirm</label>
                     <input name="retype"
                            type="password"
-                           required=""
+                           required
                            onChange={changeFieldValue}
                            value={fields.retype}
                            className="form-control"

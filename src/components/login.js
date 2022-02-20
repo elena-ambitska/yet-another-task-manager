@@ -39,7 +39,7 @@ function Login() {
                 <input
                     name="identifier"
                     type="text"
-                    required=""
+                    required
                     className="form-control"
                     onChange={changeFieldValue}
                     value={fields.identifier}
@@ -52,7 +52,7 @@ function Login() {
 
                 <input name="password"
                        type="password"
-                       required=""
+                       required
                        onChange={changeFieldValue}
                        value={fields.password}
                        className="form-control"
