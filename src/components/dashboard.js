@@ -37,17 +37,17 @@ function Dashboard() {
 
     return (
         <TasksDataContext>
-            <div>
-                <h1>Tasks</h1>
-                {columnsArr.map(({title, type}) =>
-                    <TasksColumn title={title} type={type}/>
+
+            <h1>Tasks</h1>
+            <div className="container-fluid pt-3">
+                <div className="row flex-row flex-sm-nowrap py-3">
+                {columnsArr.map(({title, type},index) =>
+                    <TasksColumn key = {index} title={title} type={type}/>
                 )}
-                {/*<ul>*/}
-                {/*    {taskList.map((task) => {*/}
-                {/*        return (<li>{task.status} {task.title} {task.description}</li>)*/}
-                {/*    })}*/}
-                {/*</ul>*/}
+                </div>
             </div>
+
+
         </TasksDataContext>
     );
 }
