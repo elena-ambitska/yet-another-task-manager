@@ -15,15 +15,15 @@ const TasksDataContext = ({children}) => {
     useEffect(async ()=>{
 
         console.log(tasksList)
-        await TaskService.createCard({
-            "id": 1,
-            "title": "ON HOLD",
-            "description": "Just do it",
-            "status": "done",
-            "published_at": "2022-02-18T21:55:09.676Z",
-            "created_at": "2022-02-18T21:55:09.686Z",
-            "updated_at": "2022-02-19T06:52:16.964Z"
-        })
+        // await TaskService.createCard({
+        //     "id": 1,
+        //     "title": "ON HOLD",
+        //     "description": "Just do it",
+        //     "status": "done",
+        //     "published_at": "2022-02-18T21:55:09.676Z",
+        //     "created_at": "2022-02-18T21:55:09.686Z",
+        //     "updated_at": "2022-02-19T06:52:16.964Z"
+        // })
         const tasksList = await TaskService.getCards();
         setTasks(tasksList);
 
@@ -39,19 +39,21 @@ const TasksDataContext = ({children}) => {
 
 export const useGetTasksByType = (requestedStatus) => {
     const {tasks} = useContext(TasksContext);
-    console.log("here");
 
     const tasksList = tasks.filter(({status}) => status === requestedStatus);
 
     return tasksList;
 }
 
-export const useUpdateCards = async () => {
+export const useUpdateCards = () => {
     const {setTasks} = useContext(TasksContext);
 
-    const actualTasks = await TaskService.getCards()
+    return async () => {
+        const actualTasks = await TaskService.getCards()
 
-    setTasks(actualTasks);
+        console.log('ololo')
+        setTasks(actualTasks);
+    }
     // TaskService.getCards().then(
     //     response => {
     //         setTasks(response)

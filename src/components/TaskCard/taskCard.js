@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TaskCard = ({title, description}) => {
+export const TaskCard = ({title, description, onUpdate}) => {
     //id="cd2"
     return (
         <div className="card draggable shadow-sm">
@@ -14,6 +14,7 @@ export const TaskCard = ({title, description}) => {
                     {description}
                 </p>
                 <button className="btn btn-primary btn-sm">View</button>
+                {<button onClick={onUpdate} >Update</button>}
             </div>
         </div>
     )

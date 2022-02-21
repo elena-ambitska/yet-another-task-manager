@@ -28,7 +28,15 @@ const columnsArr = [
 
 
 function Dashboard() {
+    const emptyTask = {
+        title: '',
+        description: '',
+        status: 'to_do',
+    };
+
     const [modalActive, setModalActive] = useState(false);
+    const [currentTask, setCurrentTask] = useState(emptyTask);
+
     // const [taskList, setTaskList] = useState([]);
     //
     // useEffect( () => {
@@ -40,21 +48,27 @@ function Dashboard() {
 
     return (
         <>
-            <Modal active={modalActive} setActive={setModalActive}/>
+
         <TasksDataContext>
 
+                <Modal active={modalActive}
+                       setActive={setModalActive}
+                       currentTask={currentTask}
+                       setCurrentTask={setCurrentTask}
+                />
             <h1>Tasks</h1>
             <div className="container-fluid pt-3">
                 <div className="row flex-row flex-sm-nowrap py-3">
                 {columnsArr.map(({title, type},index) =>
-                    <TasksColumn key = {index} title={title} type={type}/>
+                    <TasksColumn key = {index} title={title} type={type} onUpdate={(currentTask) => {setModalActive(true); setCurrentTask(currentTask)} }/>
                 )}
                 </div>
             </div>
 
 
         </TasksDataContext>
-            {<button onClick={() => setModalActive(true)}> Open modal</button>}
+            {<button onClick={() => {setModalActive(true); setCurrentTask(emptyTask)} } > Open modal</button>}
+
         </>
     );
 }
