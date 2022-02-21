@@ -14,16 +14,6 @@ const TasksDataContext = ({children}) => {
 
     useEffect(async ()=>{
 
-        console.log(tasksList)
-        // await TaskService.createCard({
-        //     "id": 1,
-        //     "title": "ON HOLD",
-        //     "description": "Just do it",
-        //     "status": "done",
-        //     "published_at": "2022-02-18T21:55:09.676Z",
-        //     "created_at": "2022-02-18T21:55:09.686Z",
-        //     "updated_at": "2022-02-19T06:52:16.964Z"
-        // })
         const tasksList = await TaskService.getCards();
         setTasks(tasksList);
 

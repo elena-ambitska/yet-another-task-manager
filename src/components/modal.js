@@ -56,8 +56,11 @@ const Modal = ({active, setActive, currentTask}) => {
              style={{display: active ? 'block' : 'none'}}
              tabIndex="-1"
              role="dialog"
-             onClick={() => setActive(false)}>
-            <div className="modal-dialog" role="document">
+             onClick={(e) => {
+                 setActive(false)}}>
+
+            <div className="modal-dialog" role="document"
+                 onClick={(e) => e.stopPropagation()}>
                 <div className="modal-content" onClick={e => e.preventDefault()}>
                     <div className="modal-header">
                         <h5 className="modal-title">Create card</h5>
