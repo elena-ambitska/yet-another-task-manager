@@ -1,0 +1,12 @@
+.modal {
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
+    display: block;
+}
+
+.modal.active {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: all;
+}

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {TasksDataContext, TasksColumn} from '../components'
 import taskService from "../services/TaskService";
 import {TYPE_CODES} from "./TasksDataContext/constants.js";
+import Modal from "./modal";
 
 
 
@@ -24,8 +25,10 @@ const columnsArr = [
         type : TYPE_CODES.done
     }
 ];
-function Dashboard() {
 
+
+function Dashboard() {
+    const [modalActive, setModalActive] = useState(false);
     // const [taskList, setTaskList] = useState([]);
     //
     // useEffect( () => {
@@ -36,6 +39,8 @@ function Dashboard() {
 
 
     return (
+        <>
+            <Modal active={modalActive} setActive={setModalActive}/>
         <TasksDataContext>
 
             <h1>Tasks</h1>
@@ -49,6 +54,8 @@ function Dashboard() {
 
 
         </TasksDataContext>
+            {<button onClick={() => setModalActive(true)}> Open modal</button>}
+        </>
     );
 }
 

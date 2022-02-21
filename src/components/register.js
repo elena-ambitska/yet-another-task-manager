@@ -42,7 +42,6 @@ const Register = () => {
 
     return (
         <article className="grid" >
-
             <form onSubmit={handleSubmit} >
                 <h2>Register</h2>
                 <div className="mb-3">
