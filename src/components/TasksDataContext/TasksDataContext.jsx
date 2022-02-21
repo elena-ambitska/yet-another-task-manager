@@ -39,6 +39,8 @@ const TasksDataContext = ({children}) => {
 
 export const useGetTasksByType = (requestedStatus) => {
     const {tasks} = useContext(TasksContext);
+    console.log("here");
+
     const tasksList = tasks.filter(({status}) => status === requestedStatus);
 
     return tasksList;

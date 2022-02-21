@@ -41,10 +41,8 @@ function Dashboard() {
             <h1>Tasks</h1>
             <div className="container-fluid pt-3">
                 <div className="row flex-row flex-sm-nowrap py-3">
-                {columnsArr.map(({title, type}) =>
-
-                            <TasksColumn title={title} type={type}/>
-
+                {columnsArr.map(({title, type},index) =>
+                    <TasksColumn key = {index} title={title} type={type}/>
                 )}
                 </div>
             </div>
