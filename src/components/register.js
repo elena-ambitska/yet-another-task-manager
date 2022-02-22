@@ -92,14 +92,13 @@ const Register = () => {
                 </div>
                 <button className="btn btn-primary">Register</button>
             </form>
-            <ul>
+            <ul className="errors-list">
                 {serverErrors.map((error) => {
                     return (<li className="alert alert-danger" key={error.id}>{error.message}</li>);
                 })}
             </ul>
         </article>
     )
-І
 }
 
 export default Register;
