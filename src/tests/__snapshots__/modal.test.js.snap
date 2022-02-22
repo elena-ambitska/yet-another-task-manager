@@ -19,7 +19,6 @@ exports[`Test Modal component should render modal component 1`] = `
   >
     <div
       className="modal-content"
-      onClick={[Function]}
     >
       <div
         className="modal-header"

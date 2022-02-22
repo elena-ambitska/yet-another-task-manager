@@ -61,7 +61,7 @@ const Modal = ({active, setActive, currentTask}) => {
 
             <div className="modal-dialog" role="document"
                  onClick={(e) => e.stopPropagation()}>
-                <div className="modal-content" onClick={e => e.preventDefault()}>
+                <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Create card</h5>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close"

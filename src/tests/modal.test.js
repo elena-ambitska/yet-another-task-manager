@@ -4,13 +4,16 @@ import {shallow} from "enzyme";
 import toJson from "enzyme-to-json";
 import TaskService from "../services/TaskService";
 import createCardMockData from "./mock/createCard";
-import createCardMockFail from"./mock/createCard_fail_400";
+import createCardMockFail from "./mock/createCard_fail_400";
+import updateCard from "./mock/updateCard";
 
 
 const createCardMock = jest.spyOn(TaskService, "createCard");
+const updateCardMock = jest.spyOn(TaskService, "updateCard");
 
 beforeEach(() => {
     createCardMock.mockClear();
+    updateCardMock.mockClear()
 });
 
 describe("Test Modal component", () => {
@@ -49,5 +52,52 @@ describe("Test Modal component", () => {
         const errorList = component.find(".errors-list");
         expect(errorList.children.length).toBe(createCardMockFail.data.errors.title.length);
         expect(errorList.childAt(0).text()).toContain(createCardMockFail.data.errors.title[0]);
+    });
+
+    it("modal component put and update data to services", async () => {
+        updateCardMock.mockReturnValueOnce(Promise.resolve(updateCard));
+
+        const component = shallow(<Modal currentTask={
+            {
+                id: 12,
+                title: "React",
+                description: "Hello"
+            }}
+        />);
+        await component
+            .find("form button[type='submit']")
+            .simulate("click", {
+                preventDefault() {
+                }
+            });
+
+        expect(updateCardMock).toHaveBeenCalledTimes(1);
+    });
+
+
+    it("modal component closed on button clicked", async () => {
+        const setActiveMock = jest.fn();
+
+        const component = shallow(<Modal currentTask={{}} setActive={setActiveMock} />);
+        await component
+            .find(".close")
+            .simulate("click", {
+                preventDefault() {}
+            });
+
+        await component
+            .find(".btn-secondary")
+            .simulate("click", {
+                preventDefault() {}
+            });
+
+        await component
+            .find(".fade")
+            .simulate("click", {
+                preventDefault() {}
+            });
+
+        expect(setActiveMock).toHaveBeenCalledWith(false);
+        expect(setActiveMock).toHaveBeenCalledTimes(3);
     });
 });
