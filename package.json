@@ -8,7 +8,9 @@
       "./src/setupTests.js"
     ],
     "testEnvironment": "jsdom",
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "version": "1.0.0",
   "description": "",
@@ -34,6 +36,7 @@
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
     "html-webpack-plugin": "^5.5.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "react-test-renderer": "^17.0.2",
     "style-loader": "^3.3.1",
