@@ -10,6 +10,8 @@ import Dashboard from "./components/dashboard";
 import Login from "./components/login";
 import Header from "./components/header";
 
+import {TasksInterface} from "./components/UserTasksInterface/tasksInterface.js";
+
 import './styles/index.css'
 
 const App = () => {
@@ -18,8 +20,11 @@ const App = () => {
 
         <div className="container">
             <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="" element={<Dashboard />} />
+                {/*<Route path="/" element={<Dashboard />} />*/}
+                {/*<Route path="" element={<Dashboard />} />*/}
+                <Route path="/" element={<TasksInterface />} />
+                <Route path="" element={<TasksInterface />} />
+
                 <Route path="register" element={<Register />} />
                 <Route path="login" element={<Login />} />
             </Routes>

@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useState} from "react";
 import "../styles/modal.css";
 import useFormFields from "../hooks/useFormFields";
 import TaskService from "../services/TaskService";
+
+import TasksDataContext from "./TasksDataContext/TasksDataContext.jsx";
+
 
 const Modal = ({active, setActive}) => {
     const [serverErrors, setServerErrors] = useState([]);
@@ -31,6 +34,9 @@ const Modal = ({active, setActive}) => {
             setServerErrors([{id: "Unknown_error", message: "Can not send request please try again later"}]);
         })
     }
+
+
+
     return (
         <div className={active ? "modal active" : "modal"} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
