@@ -63,7 +63,7 @@ function Login() {
             <button className="btn btn-primary">Login</button>
         </form>
 
-        <ul className="mt-2">
+        <ul className="errors-list mt-2">
             {serverErrors.map((error) => {
                 return (<li className="alert alert-danger" key={error.id}>{error.message}</li>);
             })}

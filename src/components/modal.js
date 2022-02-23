@@ -45,7 +45,7 @@ const Modal = ({active, setActive, currentTask}) => {
                 setActive(false);
                 updateCards();
             } else {
-                setServerErrors(result.message[0].messages);
+                setServerErrors(Object.values(result.data.errors).flat());
             }
         }).catch((error) => {
             setServerErrors([{id: "Unknown_error", message: "Can not send request please try again later"}]);
@@ -61,7 +61,7 @@ const Modal = ({active, setActive, currentTask}) => {
 
             <div className="modal-dialog" role="document"
                  onClick={(e) => e.stopPropagation()}>
-                <div className="modal-content" onClick={e => e.preventDefault()}>
+                <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Create card</h5>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close"
@@ -115,9 +115,9 @@ const Modal = ({active, setActive, currentTask}) => {
                                         onClick={() => setActive(false)}>Close
                                 </button>
 
-                                <ul>
+                                <ul className="errors-list">
                                     {serverErrors.map((error) => {
-                                        return (<li className="alert alert-danger" key={error.id}>{error.message}</li>);
+                                        return (<li className="alert alert-danger" key={error}>{error}</li>);
                                     })}
                                 </ul>
                             </div>
