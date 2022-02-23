@@ -20,7 +20,7 @@ const TasksColumn = ({title, type, onUpdate}) => {
                         </div>
 
 
-                        {tasks.map((task) =>
+                        {tasks.map(task =>
                             <TaskCard
                                 key = {task.id}
                                 title = {task.title}
@@ -31,23 +31,12 @@ const TasksColumn = ({title, type, onUpdate}) => {
                     </div>
                 </div>
             </div>
-
         </>
-
-        // <div>
-        //     <div>
-        //
-        //         {/*<div><h1>{title}</h1></div>*/}
-        //         {/*<div>{type}</div>*/}
-        //     </div>
-        // </div>
     )
-    //return <div>{btn}</div>;
-
 };
 
-TasksColumn.propTypes = {
-    title: PropTypes.string
-};
+// TasksColumn.propTypes = {
+//     title: PropTypes.string
+// };
 
 export default TasksColumn;

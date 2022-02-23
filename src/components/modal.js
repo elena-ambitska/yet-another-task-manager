@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext,useEffect} from "react";
 import {useState} from "react";
 import "../styles/modal.css";
 import useFormFields from "../hooks/useFormFields";
@@ -8,6 +8,7 @@ import {useUpdateCards} from "./TasksDataContext/TasksDataContext.jsx";
 const Modal = ({active, setActive, currentTask}) => {
     const [serverErrors, setServerErrors] = useState([]);
     const updateCards = useUpdateCards();
+
     const {fields, changeFieldValue, setFormFields} = useFormFields({
         title: '',
         description: '',
@@ -43,6 +44,7 @@ const Modal = ({active, setActive, currentTask}) => {
         promise.then((result) => {
             if (result.id) {
                 setActive(false);
+
                 updateCards();
             } else {
                 setServerErrors(Object.values(result.data.errors).flat());
