@@ -18,6 +18,7 @@ const TasksDataContext = ({children}) => {
     }
 
     useEffect(async ()=>{
+
         const tasksList = await TaskService.getCards();
         setTasks(tasksList);
     },[])
@@ -36,12 +37,15 @@ export const useGetTasksByType = (requestedStatus) => {
     return tasksList;
 }
 
-
-export const useUpdateCards = async () => {
+export const useUpdateCards = () => {
     const {setTasks} = useContext(TasksContext);
-    const actualTasks = await TaskService.getCards()
 
-    setTasks(actualTasks);
+    return async () => {
+        const actualTasks = await TaskService.getCards()
+        console.log('ololo')
+        setTasks(actualTasks);
+    }
+
 }
 
 TasksDataContext.propTypes = {

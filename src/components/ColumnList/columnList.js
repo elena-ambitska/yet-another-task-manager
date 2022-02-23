@@ -7,7 +7,11 @@ export const ColumnList = () => {
 
     return (
         columnTypes.map( ({title, value},index) =>
-             <TasksColumn key = {index} title={title} type={value} />
+             <TasksColumn
+                 key = {index}
+                 title={title}
+                 type={value}
+             />
         )
     )
 }
