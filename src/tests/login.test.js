@@ -30,7 +30,6 @@ describe("Test Login component", () => {
     it("login component sends data to services", async () => {
 
         getUserServiceDataMock.mockReturnValueOnce(Promise.resolve(resultLoginMock));
-
         const component = shallow(<Login/>);
         await component
             .find("form")

@@ -10,13 +10,12 @@ const TasksColumn = ({title, type, onUpdate}) => {
 
     return (
         <>
-            <div className="col-sm-6 col-md-4 col-xl-3">
+            <div className="col-sm-6 col-md-4 col-xl-3 for-border">
 
                 <div className="card bg-light">
                     <div className="card-body">
                         <div className="row">
                             <h4 className="card-title text-uppercase text-truncate py-2 col-10">{title}</h4>
-                            <button className="col-2">+</button>
                         </div>
 
 
@@ -25,6 +24,7 @@ const TasksColumn = ({title, type, onUpdate}) => {
                                 key = {task.id}
                                 title = {task.title}
                                 description = {task.description}
+                                id={task.id}
                                 onUpdate = {() => {onUpdate(task)}}
                             />
                         )}

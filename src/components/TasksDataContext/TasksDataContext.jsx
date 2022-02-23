@@ -42,7 +42,6 @@ export const useUpdateCards = () => {
 
     return async () => {
         const actualTasks = await TaskService.getCards()
-        console.log('ololo')
         setTasks(actualTasks);
     }
 

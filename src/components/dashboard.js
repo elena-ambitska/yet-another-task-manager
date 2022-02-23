@@ -27,7 +27,10 @@ export const Dashboard = () => {
                    currentTask={currentTask}
                    setCurrentTask={setCurrentTask}
             />
-                    <h1>Tasks</h1>
+                    <div className="wrapper-nav">
+                        <h1>Tasks</h1>
+                        {<button className="btn btn-dark" onClick={() => {setModalActive(true); setCurrentTask(emptyTask)} }>Create card</button>}
+                    </div>
                     <div className="container-fluid pt-3">
                         <div className="row flex-row flex-sm-nowrap py-3">
                             {columnTypes.map( ({title, value},index) =>
@@ -40,8 +43,6 @@ export const Dashboard = () => {
                             }
                         </div>
                     </div>
-
-            {<button onClick={() => {setModalActive(true); setCurrentTask(emptyTask)} }> Open modal</button>}
         </>
     );
 }

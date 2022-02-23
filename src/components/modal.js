@@ -65,7 +65,7 @@ const Modal = ({active, setActive, currentTask}) => {
                  onClick={(e) => e.stopPropagation()}>
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Create card</h5>
+                        <h5 className="modal-title">{currentTask.id ? "Update card" : "Create card"}</h5>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close"
                                 onClick={() => setActive(false)}>
                             <span aria-hidden="true">&times;</span>
