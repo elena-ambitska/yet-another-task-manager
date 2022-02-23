@@ -4,8 +4,6 @@ import "../styles/modal.css";
 import useFormFields from "../hooks/useFormFields";
 import TaskService from "../services/TaskService";
 
-import TasksDataContext from "./TasksDataContext/TasksDataContext.jsx";
-
 
 const Modal = ({active, setActive}) => {
     const [serverErrors, setServerErrors] = useState([]);
