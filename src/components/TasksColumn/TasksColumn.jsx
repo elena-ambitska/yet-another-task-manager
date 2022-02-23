@@ -5,7 +5,7 @@ import {useGetTasksByType} from "../TasksDataContext/TasksDataContext.jsx";
 import {TaskCard} from "../TaskCard/taskCard.js";
 
 
-const TasksColumn = ({title, type}) => {
+const TasksColumn = ({title, type, onUpdate}) => {
     const tasks = useGetTasksByType(type);
 
     return (
@@ -20,11 +20,12 @@ const TasksColumn = ({title, type}) => {
                         </div>
 
 
-                        {tasks.map(({id, title, description}) =>
+                        {tasks.map((task) =>
                             <TaskCard
-                                key = {id}
-                                title = {title}
-                                description = {description}
+                                key = {task.id}
+                                title = {task.title}
+                                description = {task.description}
+                                onUpdate = {() => {onUpdate(task)}}
                             />
                         )}
                     </div>

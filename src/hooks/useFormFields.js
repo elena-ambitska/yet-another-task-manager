@@ -11,7 +11,7 @@ const useFormFields = (initialValues) => {
         }));
     };
 
-    return {fields, changeFieldValue};
+    return {fields, changeFieldValue, setFormFields};
 }
 
 export default useFormFields;

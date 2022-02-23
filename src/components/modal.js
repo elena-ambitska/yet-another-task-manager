@@ -1,39 +1,66 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import "../styles/modal.css";
 import useFormFields from "../hooks/useFormFields";
 import TaskService from "../services/TaskService";
+import {useUpdateCards} from "./TasksDataContext/TasksDataContext.jsx";
 
-const Modal = ({active, setActive}) => {
+const Modal = ({active, setActive, currentTask}) => {
     const [serverErrors, setServerErrors] = useState([]);
-    const {fields, changeFieldValue} = useFormFields({
-        title: "",
-        description: "",
+    const updateCards = useUpdateCards();
+    const {fields, changeFieldValue, setFormFields} = useFormFields({
+        title: '',
+        description: '',
         status: "to_do",
     })
     const statuses = ["to_do", "in_progress", "testing", "done"];
 
+    useEffect(() => {
+        setFormFields({
+            title: currentTask.title + '',
+            description: currentTask.description + '',
+            status: currentTask ? currentTask.status + '' : "to_do",
+        });
+    }, [currentTask])
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("hi")
-        TaskService.createCard({
-            title: fields.title,
-            description: fields.description,
-            status: fields.status,
-        }).then((result) => {
+
+        let promise;
+        if (currentTask.id) {
+            promise = TaskService.updateCard(currentTask.id, {
+                title: fields.title,
+                description: fields.description,
+                status: fields.status,
+            });
+        } else {
+            promise = TaskService.createCard({
+                title: fields.title,
+                description: fields.description,
+                status: fields.status,
+            });
+        }
+        promise.then((result) => {
             if (result.id) {
                 setActive(false);
+                updateCards();
             } else {
                 setServerErrors(result.message[0].messages);
             }
-            console.log(result)
         }).catch((error) => {
             setServerErrors([{id: "Unknown_error", message: "Can not send request please try again later"}]);
         })
     }
     return (
-        <div className={active ? "modal active" : "modal"} tabIndex="-1" role="dialog">
-            <div className="modal-dialog" role="document">
+        <div className={active ? "modal fade show" : "modal fade"}
+             style={{display: active ? 'block' : 'none'}}
+             tabIndex="-1"
+             role="dialog"
+             onClick={(e) => {
+                 setActive(false)}}>
+
+            <div className="modal-dialog" role="document"
+                 onClick={(e) => e.stopPropagation()}>
                 <div className="modal-content" onClick={e => e.preventDefault()}>
                     <div className="modal-header">
                         <h5 className="modal-title">Create card</h5>
@@ -49,6 +76,7 @@ const Modal = ({active, setActive}) => {
                                 <input
                                     name="title"
                                     required
+                                    value={fields.title}
                                     onChange={changeFieldValue}
                                     className="form-control"
                                     id="titleInput"
@@ -59,6 +87,7 @@ const Modal = ({active, setActive}) => {
                                 <input
                                     name="description"
                                     required
+                                    value={fields.description}
                                     onChange={changeFieldValue}
                                     className="form-control"
                                     id="descriptionInput"
@@ -70,6 +99,7 @@ const Modal = ({active, setActive}) => {
                             <select name="status"
                                     className="form-control"
                                     id="exampleFormControlSelect1"
+                                    value={fields.status}
                                     onChange={changeFieldValue}>
                                 {statuses.map((status) => {
                                     return (
