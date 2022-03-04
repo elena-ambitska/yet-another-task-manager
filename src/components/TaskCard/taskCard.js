@@ -1,8 +1,9 @@
 import React, {useContext} from "react";
 import {TasksContext} from "../TasksDataContext/TasksDataContext.jsx";
 import iconUpdate from "../../images/pencil-svgrepo-com.svg";
+import {convertTime} from "../../utils/time";
 
-export const TaskCard = ({title, description, id, onUpdate}) => {
+export const TaskCard = ({title, description, id, onUpdate, updateTime}) => {
     //id="cd2"
     const {deleteCard} = useContext(TasksContext)
 
@@ -15,6 +16,8 @@ export const TaskCard = ({title, description, id, onUpdate}) => {
                 <p>
                     {description}
                 </p>
+
+                <p>Update task: {convertTime(updateTime)}</p>
                 <div className="wrapper-btn">
                 <button className="btn btn-warning" onClick={onUpdate}><img className="updateIcon" src={iconUpdate} /></button>
                 <button className="btn btn-danger"  onClick={()=>deleteCard(id)}>X</button>

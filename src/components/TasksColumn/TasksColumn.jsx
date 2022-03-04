@@ -25,7 +25,9 @@ const TasksColumn = ({title, type, onUpdate}) => {
                                 title = {task.title}
                                 description = {task.description}
                                 id={task.id}
-                                onUpdate = {() => {onUpdate(task)}}
+                                updateTime = {task.updated_at}
+                                onUpdate = {() => {onUpdate(task)}
+                            }
                             />
                         )}
                     </div>
