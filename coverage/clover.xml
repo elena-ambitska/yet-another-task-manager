@@ -73,7 +73,7 @@
     </package>
     <package name="components.TasksDataContext">
       <metrics statements="19" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="1"/>
-      <file name="TasksDataContext.jsx" path="C:\Projects\pm-prj-2\src\components\TasksDataContext\TasksDataContext.jsx">
+      <file name="TasksDataContext.js" path="C:\Projects\pm-prj-2\src\components\TasksDataContext\TasksDataContext.js">
         <metrics statements="18" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="1"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>

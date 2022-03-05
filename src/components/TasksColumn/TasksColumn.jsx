@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useGetTasksByType} from "../TasksDataContext/TasksDataContext.jsx";
+import {useGetTasksByType} from "../TasksDataContext/TasksDataContext.js";
 
 import {TaskCard} from "../TaskCard/taskCard.js";
 

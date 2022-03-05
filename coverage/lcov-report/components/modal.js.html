@@ -330,7 +330,7 @@ import {useState} from "react";
 import "../styles/modal.css";
 import useFormFields from "../hooks/useFormFields";
 import TaskService from "../services/TaskService";
-import {useUpdateCards} from "./TasksDataContext/TasksDataContext.jsx";
+import {useUpdateCards} from "./TasksDataContext/TasksDataContext.js";
 &nbsp;
 const Modal = ({active, setActive, currentTask}) =&gt; {
     const [serverErrors, setServerErrors] = useState([]);

@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {TasksContext} from "../TasksDataContext/TasksDataContext.jsx";
+import {TasksContext} from "../TasksDataContext/TasksDataContext.js";
 import iconUpdate from "../../images/pencil-svgrepo-com.svg";
 import {convertTime} from "../../utils/time";
 

@@ -1,3 +1,3 @@
-import TasksDataContext from './TasksDataContext.jsx'
+import TasksDataContext from './TasksDataContext.js'
 
 export default TasksDataContext;

@@ -3,7 +3,8 @@ import {useState} from "react";
 import "../styles/modal.css";
 import useFormFields from "../hooks/useFormFields";
 import TaskService from "../services/TaskService";
-import {useUpdateCards} from "./TasksDataContext/TasksDataContext.jsx";
+import {useUpdateCards} from "./TasksDataContext/TasksDataContext.js";
+import {ColumnsContext} from "./TypeColumnContext/TypeColumnContext";
 
 const Modal = ({active, setActive, currentTask}) => {
     const [serverErrors, setServerErrors] = useState([]);
@@ -14,7 +15,7 @@ const Modal = ({active, setActive, currentTask}) => {
         description: '',
         status: "to_do",
     })
-    const statuses = ["to_do", "in_progress", "testing", "done"];
+    const {columnTypes} = useContext(ColumnsContext);
 
     useEffect(() => {
         setFormFields({
@@ -103,9 +104,9 @@ const Modal = ({active, setActive, currentTask}) => {
                                     id="exampleFormControlSelect1"
                                     value={fields.status}
                                     onChange={changeFieldValue}>
-                                {statuses.map((status) => {
+                                {columnTypes.map((status) => {
                                     return (
-                                        <option value={status} key={status}>{status}</option>
+                                        <option value={status} key={status.value}>{status.title}</option>
                                     )
                                 })}
                             </select>
