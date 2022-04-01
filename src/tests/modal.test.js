@@ -6,14 +6,21 @@ import TaskService from "../services/TaskService";
 import createCardMockData from "./mock/createCard";
 import createCardMockFail from "./mock/createCard_fail_400";
 import updateCard from "./mock/updateCard";
+import StatusService from "../services/StatusService";
+
+import statuses from "./mock/statuses";
 
 
 const createCardMock = jest.spyOn(TaskService, "createCard");
 const updateCardMock = jest.spyOn(TaskService, "updateCard");
+const listStatusMock = jest.spyOn(StatusService, "getStatuses");
 
 beforeEach(() => {
     createCardMock.mockClear();
-    updateCardMock.mockClear()
+    updateCardMock.mockClear();
+    listStatusMock.mockClear();
+
+    listStatusMock.mockReturnValueOnce(Promise.resolve(statuses));
 });
 
 describe("Test Modal component", () => {
