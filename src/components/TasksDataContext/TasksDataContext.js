@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import {createContext, useState, useContext} from "react";
 import TaskService from "../../services/TaskService.js";
+import useLoader from "../../hooks/useLoader";
 
 
 export const TasksContext = createContext([]);
 
 const TasksDataContext = ({children}) => {
     const [tasks, setTasks] = useState([])
-
+    const [loader, showLoader, hideLoader, loading] = useLoader();
 
     async function deleteCard (id) {
        await TaskService.deleteCard(id);
@@ -18,14 +19,16 @@ const TasksDataContext = ({children}) => {
     }
 
     useEffect(async ()=>{
-
+        showLoader();
         const tasksList = await TaskService.getCards();
+        hideLoader();
         setTasks(tasksList);
     },[])
 
     return (
         <TasksContext.Provider value={{tasks, setTasks, deleteCard}}>
-            {children}
+            {loader}
+            {!loading ? children : ''}
         </TasksContext.Provider>
     );
 };
