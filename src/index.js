@@ -3,7 +3,8 @@ import React from 'react';
 import {
     Route,
     Routes,
-    BrowserRouter
+    BrowserRouter,
+    Navigate
 } from "react-router-dom";
 import Register from "./components/register";
 import Dashboard from "./components/dashboard";
@@ -27,6 +28,10 @@ const App = () => {
 
                 <Route path="register" element={<Register />} />
                 <Route path="login" element={<Login />} />
+                <Route
+                    path="*"
+                    element={<Navigate to="/login" replace />}
+                />
             </Routes>
         </div>
     </BrowserRouter>);
