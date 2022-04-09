@@ -1,38 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useGetToDoTasks} from "../TasksDataContext/TasksDataContext.jsx";
-import {TYPE_CODES} from "../TasksDataContext/constants.js";
+import {useGetTasksByType} from "../TasksDataContext/TasksDataContext.js";
 
-import {useGetInProgressTasks} from "../TasksDataContext/TasksDataContext.jsx";
-import {useGetOnHoldTasks} from "../TasksDataContext/TasksDataContext.jsx";
-import {useGetDoneTasks} from "../TasksDataContext/TasksDataContext.jsx";
+import {TaskCard} from "../TaskCard/taskCard.js";
 
-const columnTypeToMethodMap = {
-    [TYPE_CODES.toDo] : useGetToDoTasks,
-    [TYPE_CODES.inProgress] : useGetInProgressTasks,
-    [TYPE_CODES.onHold] : useGetOnHoldTasks,
-    [TYPE_CODES.done] : useGetDoneTasks
-}
 
-const TasksColumn = ({title, type}) => {
-    const data = columnTypeToMethodMap[type];
-    console.log(data?.())
+const TasksColumn = ({title, type, onUpdate}) => {
+    const tasks = useGetTasksByType(type);
 
     return (
-        <div>
-            <div>
-                <div><h1>{title}</h1></div>
-                <div>{type}</div>
+        <>
+            <div className="col-sm-6 col-md-4 col-xl-3 for-border">
+
+                <div className="card bg-light">
+                    <div className="card-body">
+                        <div className="row">
+                            <h4 className="card-title text-uppercase text-truncate py-2 col-10">{title}</h4>
+                        </div>
+
+
+                        {tasks.map(task =>
+                            <TaskCard
+                                key = {task.id}
+                                title = {task.title}
+                                description = {task.description}
+                                id={task.id}
+                                updateTime = {task.updated_at}
+                                onUpdate = {() => {onUpdate(task)}
+                            }
+                            />
+                        )}
+                    </div>
+                </div>
             </div>
-
-        </div>
+        </>
     )
-    //return <div>{btn}</div>;
-
 };
 
-TasksColumn.propTypes = {
-    title: PropTypes.string
-};
+// TasksColumn.propTypes = {
+//     title: PropTypes.string
+// };
 
 export default TasksColumn;

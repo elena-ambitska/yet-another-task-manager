@@ -42,7 +42,6 @@ const Register = () => {
 
     return (
         <article className="grid" >
-
             <form onSubmit={handleSubmit} >
                 <h2>Register</h2>
                 <div className="mb-3">
@@ -93,14 +92,13 @@ const Register = () => {
                 </div>
                 <button className="btn btn-primary">Register</button>
             </form>
-            <ul>
+            <ul className="errors-list">
                 {serverErrors.map((error) => {
                     return (<li className="alert alert-danger" key={error.id}>{error.message}</li>);
                 })}
             </ul>
         </article>
     )
-І
 }
 
 export default Register;

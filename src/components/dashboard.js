@@ -1,54 +1,49 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import Modal from "./modal";
+import {ColumnList} from "./ColumnList/columnList.js";
+import TasksColumn from "./TasksColumn/TasksColumn.jsx";
+//import TasksColumn from "../TasksColumn/TasksColumn.jsx";
+import {ColumnsContext} from "./TypeColumnContext/TypeColumnContext";
+//import TasksColumn from "./TasksColumn";
 
-import {TasksDataContext, TasksColumn} from '../components'
-import taskService from "../services/TaskService";
-import {TYPE_CODES} from "./TasksDataContext/constants.js";
 
 
+export const Dashboard = () => {
+    const emptyTask = {
+        title: '',
+        description: '',
+        status: 'to_do',
+    };
+    const [modalActive, setModalActive] = useState(false);
+    const [currentTask, setCurrentTask] = useState(emptyTask);
 
-const columnsArr = [
-    {
-        title : 'To Do',
-        type : TYPE_CODES.toDo
-    },
-    {
-        title : 'In Progress',
-        type : TYPE_CODES.inProgress
-    },
-    {
-        title : 'On Hold',
-        type : TYPE_CODES.onHold
-    },
-    {
-        title : 'Done',
-        type : TYPE_CODES.done
-    }
-];
-function Dashboard() {
-
-    // const [taskList, setTaskList] = useState([]);
-    //
-    // useEffect( () => {
-    //     taskService.list().then((list) => {
-    //         setTaskList(list)
-    //     })
-    // }, []);
+    const {columnTypes} = useContext(ColumnsContext);
 
 
     return (
-        <TasksDataContext>
-            <div>
-                <h1>Tasks</h1>
-                {columnsArr.map(({title, type}) =>
-                    <TasksColumn title={title} type={type}/>
-                )}
-                {/*<ul>*/}
-                {/*    {taskList.map((task) => {*/}
-                {/*        return (<li>{task.status} {task.title} {task.description}</li>)*/}
-                {/*    })}*/}
-                {/*</ul>*/}
-            </div>
-        </TasksDataContext>
+        <>
+            <Modal active={modalActive}
+                   setActive={setModalActive}
+                   currentTask={currentTask}
+                   setCurrentTask={setCurrentTask}
+            />
+                    <div className="wrapper-nav">
+                        <h1>Tasks</h1>
+                        {<button className="btn btn-dark" onClick={() => {setModalActive(true); setCurrentTask(emptyTask)} }>Create card</button>}
+                    </div>
+                    <div className="container-fluid pt-3">
+                        <div className="row flex-row flex-sm-nowrap py-3">
+                            {columnTypes.map( ({title, value},index) =>
+                                <TasksColumn
+                                    key = {index}
+                                    title={title}
+                                    type={value}
+                                    onUpdate={(currentTask) => {setModalActive(true); setCurrentTask(currentTask)}}
+                                />)
+                            }
+                        </div>
+                    </div>
+        </>
     );
 }
 
