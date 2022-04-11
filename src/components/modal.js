@@ -25,38 +25,39 @@ const Modal = ({active, setActive, currentTask}) => {
         });
     }, [currentTask])
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const isEditMode = !!currentTask.id;
 
-        let promise;
-        if (currentTask.id) {
-            promise = TaskService.updateCard(currentTask.id, {
+    const handleSubmit = async (e) => {
+        try {
+            e.preventDefault();
+
+            const data = {
                 title: fields.title,
                 description: fields.description,
                 status: fields.status,
-            });
-        } else {
-            promise = TaskService.createCard({
-                title: fields.title,
-                description: fields.description,
-                status: fields.status,
-            });
-        }
-        promise.then((result) => {
-            if (result.id) {
-                setActive(false);
+            };
 
-                updateCards();
-            } else {
+            const taskRequest = isEditMode
+                ? TaskService.updateCard(currentTask.id, data)
+                : TaskService.createCard(data)
+
+            const result = await taskRequest;
+
+            if (result.data.errors) {
                 setServerErrors(Object.values(result.data.errors).flat());
+                return;
             }
-        }).catch((error) => {
+
+            setActive(false);
+            updateCards();
+
+        } catch(error) {
             setServerErrors([{id: "Unknown_error", message: "Can not send request please try again later"}]);
-        })
+        }
     }
+
     return (
         <div className={active ? "modal fade show" : "modal fade"}
-             style={{display: active ? 'block' : 'none'}}
              tabIndex="-1"
              role="dialog"
              onClick={(e) => {
