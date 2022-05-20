@@ -5,7 +5,7 @@ class StatusService extends BaseService {
 
     async getStatuses(dispatch) {
         const data =  await this.get(`statuses`);
-        dispatch(getStatuses(data))
+        return dispatch(getStatuses(data))
     }
 }
 

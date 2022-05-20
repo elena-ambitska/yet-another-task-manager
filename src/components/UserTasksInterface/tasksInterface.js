@@ -9,9 +9,7 @@ export const TasksInterface = () => {
     const [user, setUser] = useLocalStorage('user', null);
 
     return user ?
-        <TasksDataContext>
-            <Dashboard/>
-        </TasksDataContext>
+        <Dashboard/>
      :  <Navigate to={"/login"} />
 
 }
