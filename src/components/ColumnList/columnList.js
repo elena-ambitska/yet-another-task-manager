@@ -1,12 +1,15 @@
 import React, {useContext} from "react";
-import {ColumnsContext} from "../TypeColumnContext/TypeColumnContext.js";
 import TasksColumn from "../TasksColumn/TasksColumn.jsx";
+import {useSelector} from "react-redux";
 
 export const ColumnList = () => {
-    const {columnTypes} = useContext(ColumnsContext);
+
+    const statuses = useSelector((state)=>{
+        return state.statuses
+    });
 
     return (
-        columnTypes.map( ({title, value},index) =>
+        statuses.map( ({title, value},index) =>
              <TasksColumn
                  key = {index}
                  title={title}

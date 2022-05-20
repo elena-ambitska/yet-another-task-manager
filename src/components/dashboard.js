@@ -2,11 +2,9 @@ import React, {useContext, useEffect, useState} from "react";
 import Modal from "./modal";
 import {ColumnList} from "./ColumnList/columnList.js";
 import TasksColumn from "./TasksColumn/TasksColumn.jsx";
-//import TasksColumn from "../TasksColumn/TasksColumn.jsx";
-import {ColumnsContext} from "./TypeColumnContext/TypeColumnContext";
-//import TasksColumn from "./TasksColumn";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import TaskService from "../services/TaskService";
+import StatusService from "../services/StatusService";
 
 
 export const Dashboard = () => {
@@ -18,11 +16,14 @@ export const Dashboard = () => {
     const [modalActive, setModalActive] = useState(false);
     const [currentTask, setCurrentTask] = useState(emptyTask);
 
-    const {columnTypes} = useContext(ColumnsContext);
+    const statuses = useSelector((state)=>{
+        return state.statuses
+    });
 
     const dispatch  =  useDispatch();
     useEffect(() => {
         TaskService.getCards(dispatch)
+        StatusService.getStatuses(dispatch);
     },[])
 
     return (
@@ -38,7 +39,7 @@ export const Dashboard = () => {
                     </div>
                     <div className="container-fluid pt-3">
                         <div className="row flex-row flex-sm-nowrap py-3">
-                            {columnTypes.map( ({title, value},index) =>
+                            {statuses.map( ({title, value},index) =>
                                 <TasksColumn
                                     key = {index}
                                     title={title}
