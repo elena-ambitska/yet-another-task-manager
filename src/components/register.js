@@ -3,6 +3,7 @@ import useFormFields from "../hooks/useFormFields";
 import UserService from "../services/UserService";
 import useLocalStorage from "../hooks/useLocalStorage";
 import {useNavigate} from "react-router";
+import {useDispatch} from "react-redux";
 
 const Register = () => {
     const {fields, changeFieldValue} = useFormFields({
@@ -15,20 +16,21 @@ const Register = () => {
     const [user, setUser] = useLocalStorage('user', null);
     const [serverErrors, setServerErrors] = useState([]);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(fields.password !== fields.retype){
+        if (fields.password !== fields.retype) {
             setServerErrors([{id: "passwords_not_match", message: "Error passwords not match"}]);
             return;
         }
 
-        UserService.register({
+        dispatch(UserService.register({
             email: fields.email,
             username: fields.login,
             password: fields.password,
-        }).then((result) => {
+        })).then((result) => {
             if (typeof result['jwt'] === 'string') {
                 setUser(result);
                 navigate('/');
@@ -41,11 +43,11 @@ const Register = () => {
     }
 
     return (
-        <article className="grid" >
-            <form onSubmit={handleSubmit} >
+        <article className="grid">
+            <form onSubmit={handleSubmit}>
                 <h2>Register</h2>
                 <div className="mb-3">
-                <label htmlFor="nameInput" className="form-label"> Name</label>
+                    <label htmlFor="nameInput" className="form-label"> Name</label>
                     <input
                         name="login"
                         required
@@ -57,7 +59,7 @@ const Register = () => {
 
                 </div>
                 <div className="mb-3">
-                <label htmlFor="emailInput" className="form-label"> Email</label>
+                    <label htmlFor="emailInput" className="form-label"> Email</label>
                     <input
                         name="email"
                         type="email"
@@ -80,7 +82,7 @@ const Register = () => {
                     />
                 </div>
                 <div className="mb-3">
-                <label htmlFor="passwordConfirmInput" className="form-label"> Password Confirm</label>
+                    <label htmlFor="passwordConfirmInput" className="form-label"> Password Confirm</label>
                     <input name="retype"
                            type="password"
                            required

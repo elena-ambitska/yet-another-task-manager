@@ -3,6 +3,7 @@ import useFormFields from "../hooks/useFormFields";
 import useLocalStorage from "../hooks/useLocalStorage";
 import {useNavigate} from "react-router";
 import UserService from "../services/UserService";
+import {useDispatch} from "react-redux";
 
 function Login() {
     const {fields, changeFieldValue} = useFormFields({
@@ -13,11 +14,12 @@ function Login() {
     const [user, setUser] = useLocalStorage('user', null);
     const [serverErrors, setServerErrors] = useState([]);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        UserService.login(fields).then((result) => {
+       dispatch(UserService.login(fields)).then((result) => {
             if (typeof result['jwt'] === 'string') {
                 setUser(result);
                 navigate('/');
