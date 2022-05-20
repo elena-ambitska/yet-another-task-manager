@@ -5,6 +5,7 @@ import useFormFields from "../hooks/useFormFields";
 import TaskService from "../services/TaskService";
 import {useUpdateCards} from "./TasksDataContext/TasksDataContext.js";
 import {ColumnsContext} from "./TypeColumnContext/TypeColumnContext";
+import {useDispatch} from "react-redux";
 
 const Modal = ({active, setActive, currentTask}) => {
     const [serverErrors, setServerErrors] = useState([]);
@@ -16,6 +17,7 @@ const Modal = ({active, setActive, currentTask}) => {
         status: "to_do",
     })
     const {columnTypes} = useContext(ColumnsContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setFormFields({
@@ -29,24 +31,22 @@ const Modal = ({active, setActive, currentTask}) => {
         e.preventDefault();
 
         let promise;
-        if (currentTask.id) {
-            promise = TaskService.updateCard(currentTask.id, {
-                title: fields.title,
-                description: fields.description,
-                status: fields.status,
-            });
+        const data = {
+            title: fields.title,
+            description: fields.description,
+            status: fields.status,
+        };
+        if (currentTask && currentTask.id) {
+            promise = dispatch(TaskService.updateCard(currentTask.id, data));
         } else {
-            promise = TaskService.createCard({
-                title: fields.title,
-                description: fields.description,
-                status: fields.status,
-            });
+            promise = dispatch(TaskService.createCard(data));
         }
         promise.then((result) => {
             if (result.id) {
                 setActive(false);
 
-                updateCards();
+                // updateCards();
+
             } else {
                 setServerErrors(Object.values(result.data.errors).flat());
             }
@@ -106,7 +106,7 @@ const Modal = ({active, setActive, currentTask}) => {
                                     onChange={changeFieldValue}>
                                 {columnTypes.map((status) => {
                                     return (
-                                        <option value={status} key={status.value}>{status.title}</option>
+                                        <option value={status.value} key={status.value}>{status.title}</option>
                                     )
                                 })}
                             </select>

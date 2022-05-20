@@ -5,6 +5,7 @@ const useFormFields = (initialValues) => {
 
     const changeFieldValue = (e) => {
         const {name, value} = e.target;
+        console.log({name, value});
         setFormFields(prev => ({
             ...prev,
             [name]:value,
