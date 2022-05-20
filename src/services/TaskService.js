@@ -4,7 +4,7 @@ import {createTask, deleteTask, getTasks, updateTask} from '../redux/actions/tas
 class TaskService extends BaseService {
     async getCards(dispatch){
        const data = await this.get(`cards`);
-       dispatch(getTasks(data))
+       return dispatch(getTasks(data))
     }
 
     async getCard(id) {
