@@ -1,11 +1,11 @@
-import React, {useContext,useEffect} from "react";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import "../styles/modal.css";
 import useFormFields from "../hooks/useFormFields";
 import TaskService from "../services/TaskService";
 import {useUpdateCards} from "./TasksDataContext/TasksDataContext.js";
-import {ColumnsContext} from "./TypeColumnContext/TypeColumnContext";
-import {useDispatch} from "react-redux";
+
+import {useDispatch, useSelector} from "react-redux";
 
 const Modal = ({active, setActive, currentTask}) => {
     const [serverErrors, setServerErrors] = useState([]);
@@ -16,7 +16,9 @@ const Modal = ({active, setActive, currentTask}) => {
         description: '',
         status: "to_do",
     })
-    const {columnTypes} = useContext(ColumnsContext);
+    const statuses = useSelector((state)=>{
+        return state.statuses
+    });
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -45,7 +47,6 @@ const Modal = ({active, setActive, currentTask}) => {
             if (result.id) {
                 setActive(false);
 
-                // updateCards();
 
             } else {
                 setServerErrors(Object.values(result.data.errors).flat());
@@ -104,7 +105,7 @@ const Modal = ({active, setActive, currentTask}) => {
                                     id="exampleFormControlSelect1"
                                     value={fields.status}
                                     onChange={changeFieldValue}>
-                                {columnTypes.map((status) => {
+                                {statuses.map((status) => {
                                     return (
                                         <option value={status.value} key={status.value}>{status.title}</option>
                                     )
