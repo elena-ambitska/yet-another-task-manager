@@ -1,10 +1,11 @@
-import useLocalStorage from "../hooks/useLocalStorage";
+
 
 class BaseService {
     #domain = 'https://radiant-temple-07706.herokuapp.com/';
 
     getHeaders(withAuth=true) {
-        const user = JSON.parse(window.localStorage.getItem('user'));
+        const user = window.user;
+
         const headers = {
             'Content-Type': 'application/json',
         };

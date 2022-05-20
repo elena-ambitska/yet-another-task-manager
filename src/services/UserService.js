@@ -1,13 +1,27 @@
 import BaseService from "./BaseService";
+import {setAuth} from "../redux/actions/userActions";
 
 class UserService extends BaseService {
 
-    async register(data) {
-        return this.post(`auth/local/register`, data, false);
+    register(data) {
+        return async (dispatch) => {
+            const userInfo = await this.post(`auth/local/register`, data, false)
+            if (userInfo.jwt) {
+                dispatch(setAuth(userInfo))
+            }
+            return userInfo;
+        };
     }
 
-    async login(data) {
-        return this.post(`auth/local`, data, false);
+
+    login(data) {
+        return async (dispatch) => {
+            const userInfo = await this.post(`auth/local`, data, false)
+            if (userInfo.jwt) {
+                dispatch(setAuth(userInfo))
+            }
+            return userInfo;
+        };
     }
 }
 
