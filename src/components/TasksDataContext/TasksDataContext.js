@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {createContext, useState, useContext} from "react";
 import TaskService from "../../services/TaskService.js";
 import useLoader from "../../hooks/useLoader";
+import {useSelector} from "react-redux";
+
 
 
 export const TasksContext = createContext([]);
@@ -20,9 +22,9 @@ const TasksDataContext = ({children}) => {
 
     useEffect(async ()=>{
         showLoader();
-        const tasksList = await TaskService.getCards();
+        // const tasksList = await TaskService.getCards();
         hideLoader();
-        setTasks(tasksList);
+        // setTasks(tasksList);
     },[])
 
     return (
@@ -34,10 +36,11 @@ const TasksDataContext = ({children}) => {
 };
 
 export const useGetTasksByType = (requestedStatus) => {
-    const {tasks} = useContext(TasksContext);
-    const tasksList = tasks.filter(({status}) => status === requestedStatus);
+    const tasks = useSelector((state) => {
+        return state.tasks ?? [];
+    });
 
-    return tasksList;
+    return tasks.filter(({status}) => status === requestedStatus);
 }
 
 export const useUpdateCards = () => {

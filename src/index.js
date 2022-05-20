@@ -7,34 +7,40 @@ import {
     Navigate
 } from "react-router-dom";
 import Register from "./components/register";
-import Dashboard from "./components/dashboard";
 import Login from "./components/login";
 import Header from "./components/header";
-
 import {TasksInterface} from "./components/UserTasksInterface/tasksInterface.js";
-
 import './styles/index.css'
+import {configureStore} from "./redux";
+import {Provider} from "react-redux";
+
+
 
 const App = () => {
-    return  ( <BrowserRouter>
-        <Header />
-
+    return (<BrowserRouter>
+        <Header/>
         <div className="container">
             <Routes>
-                {/*<Route path="/" element={<Dashboard />} />*/}
-                {/*<Route path="" element={<Dashboard />} />*/}
-                <Route path="/" element={<TasksInterface />} />
-                <Route path="" element={<TasksInterface />} />
-
-                <Route path="register" element={<Register />} />
-                <Route path="login" element={<Login />} />
+                <Route path="/" element={<TasksInterface/>}/>
+                <Route path="" element={<TasksInterface/>}/>
+                <Route path="register" element={<Register/>}/>
+                <Route path="login" element={<Login/>}/>
                 <Route
                     path="*"
-                    element={<Navigate to="/login" replace />}
+                    element={<Navigate to="/login" replace/>}
                 />
             </Routes>
         </div>
     </BrowserRouter>);
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+
+const store = configureStore();
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+
+    document.getElementById('app')
+);

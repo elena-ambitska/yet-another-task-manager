@@ -1,24 +1,41 @@
 import BaseService from "./BaseService";
+import {createTask, deleteTask, getTasks, updateTask} from '../redux/actions/taskActions'
 
 class TaskService extends BaseService {
-    async getCards() {
-        return await this.get(`cards`);
+    async getCards(dispatch){
+       const data = await this.get(`cards`);
+       dispatch(getTasks(data))
     }
 
     async getCard(id) {
         return await this.get(`cards/${id}`);
     }
 
-    async updateCard(id, data) {
-        return await this.put(`cards/${id}`, data);
+    updateCard(id, data) {
+        return async (dispatch) => {
+            const task = await this.put(`cards/${id}`, data);
+            if (task.id) {
+                dispatch(updateTask(task));
+            }
+            return task;
+        }
     }
 
-    async createCard(data) {
-        return await this.post(`cards/`, data);
+    createCard(data) {
+        return async (dispatch) => {
+            const task= await this.post(`cards/`, data);
+            dispatch(createTask(task));
+
+            return task;
+        }
+
     }
 
-    async deleteCard(id) {
-        return await this.delete(`cards/${id}`);
+    deleteCard(id) {
+       return async (dispatch) => {
+            await this.delete(`cards/${id}`);
+            dispatch(deleteTask(id))
+        }
     }
 }
 

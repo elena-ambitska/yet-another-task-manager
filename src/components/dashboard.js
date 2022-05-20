@@ -5,7 +5,8 @@ import TasksColumn from "./TasksColumn/TasksColumn.jsx";
 //import TasksColumn from "../TasksColumn/TasksColumn.jsx";
 import {ColumnsContext} from "./TypeColumnContext/TypeColumnContext";
 //import TasksColumn from "./TasksColumn";
-
+import {useDispatch} from "react-redux";
+import TaskService from "../services/TaskService";
 
 
 export const Dashboard = () => {
@@ -19,6 +20,10 @@ export const Dashboard = () => {
 
     const {columnTypes} = useContext(ColumnsContext);
 
+    const dispatch  =  useDispatch();
+    useEffect(() => {
+        TaskService.getCards(dispatch)
+    },[])
 
     return (
         <>

@@ -2,10 +2,15 @@ import React, {useContext} from "react";
 import {TasksContext} from "../TasksDataContext/TasksDataContext.js";
 import iconUpdate from "../../images/pencil-svgrepo-com.svg";
 import {convertTime} from "../../utils/time";
+import {useDispatch} from "react-redux";
+import TaskService from "../../services/TaskService";
 
 export const TaskCard = ({title, description, id, onUpdate, updateTime}) => {
     //id="cd2"
-    const {deleteCard} = useContext(TasksContext)
+    const dispatch = useDispatch();
+    const deleteCard = (id) => {
+        dispatch(TaskService.deleteCard(id));
+    }
 
     return (
         <div className="card draggable shadow-sm">
