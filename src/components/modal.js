@@ -3,13 +3,13 @@ import {useState} from "react";
 import "../styles/modal.css";
 import useFormFields from "../hooks/useFormFields";
 import TaskService from "../services/TaskService";
-import {useUpdateCards} from "./TasksDataContext/TasksDataContext.js";
+
 
 import {useDispatch, useSelector} from "react-redux";
 
 const Modal = ({active, setActive, currentTask}) => {
     const [serverErrors, setServerErrors] = useState([]);
-    const updateCards = useUpdateCards();
+
 
     const {fields, changeFieldValue, setFormFields} = useFormFields({
         title: '',
