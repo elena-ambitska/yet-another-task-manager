@@ -5,7 +5,7 @@ import {Dashboard} from "../dashboard.js"
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 export const TasksInterface = () => {
-    const [user] = useLocalStorage('user', null);
+    const [user, setUser] = useLocalStorage('user', null);
 
     return user ?
         <Dashboard/>

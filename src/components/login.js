@@ -11,7 +11,7 @@ function Login() {
         password: '',
     });
 
-    const [setUser] = useLocalStorage('user', null);
+    const [user,setUser] = useLocalStorage('user', null);
     const [serverErrors, setServerErrors] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
