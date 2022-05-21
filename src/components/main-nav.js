@@ -22,7 +22,6 @@ function MainNav() {
         setUser(null);
         navigate('/login')
     };
-    console.log('user', user)
 
     if (user) {
         return (<>

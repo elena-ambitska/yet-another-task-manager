@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import TaskService from "../../services/TaskService";
 
 export const TaskCard = ({title, description, id, onUpdate, updateTime}) => {
-    //id="cd2"
+
     const dispatch = useDispatch();
     const deleteCard = (id) => {
         dispatch(TaskService.deleteCard(id));
@@ -23,7 +23,7 @@ export const TaskCard = ({title, description, id, onUpdate, updateTime}) => {
 
                 <p>Update task: {convertTime(updateTime)}</p>
                 <div className="wrapper-btn">
-                <button className="btn btn-warning" onClick={onUpdate}><img className="updateIcon" src={iconUpdate} /></button>
+                <button className="btn btn-warning" onClick={onUpdate}><img className="updateIcon" alt="pencil" src={iconUpdate} /></button>
                 <button className="btn btn-danger"  onClick={()=>deleteCard(id)}>X</button>
                 </div>
             </div>
