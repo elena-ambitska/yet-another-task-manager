@@ -4,9 +4,10 @@ import updateCardFromService from "./mock/updateCardService";
 import createTaskFromService from "./mock/createTaskFromService";
 import deleteTaskFromService from "./mock/deleteTaskFromService";
 import getCardFromService from "./mock/getCardFromService";
+import {CREATE_TASK, DELETE_TASK, UPDATE_TASK} from "../redux/constants/taskConst";
+
 
 describe("test task services", () => {
-
     global.fetch = jest.fn((url, option) => {
         let result;
         switch (option.method){
@@ -33,8 +34,8 @@ describe("test task services", () => {
     });
 
     it("should return tasks card", async () => {
-        const taskList = await TaskService.getCards();
-        expect(taskList[0].title).toBe(getCardsFromService[0].title);
+        const taskList = await TaskService.getCards(() => {});
+        expect(taskList.title).toBe(getCardsFromService.title);
     });
 
     it("should return task card", async () => {
@@ -43,17 +44,27 @@ describe("test task services", () => {
     })
 
     it("should return update card", async () => {
-        const updateTask = await TaskService.updateCard();
+        const id = 123;
+        const updateTask = await TaskService.updateCard(id, {})((event) => {
+            expect(event.type).toBe(UPDATE_TASK);
+            // expect(event.payload).toBe(data.id);
+        });
         expect(updateTask.title).toBe(updateCardFromService.title);
     });
 
     it("should return delete card", async () => {
-        const deleteTask = await TaskService.deleteCard();
-        expect(deleteTask.title).toBe(deleteTaskFromService.title);
+        const id = 123;
+        await TaskService.deleteCard(id)((event) => {
+            expect(event.type).toBe(DELETE_TASK);
+            expect(event.payload).toBe(id);
+        });
+
     });
 
     it("should return create card", async () => {
-        const createTask = await TaskService.createCard();
-        expect(createTask.title).toContain(createTaskFromService.title);
+        const createTask = await TaskService.createCard(createTaskFromService)((event) => {
+            expect(event.type).toBe(CREATE_TASK);
+            expect(event.payload.title).toBe(createTaskFromService.title);
+        });
     });
 })
