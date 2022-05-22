@@ -119,7 +119,7 @@ const Modal = ({active, setActive, currentTask}) => {
                                         onClick={() => setActive(false)}>Close
                                 </button>
 
-                                <ul className="errors-list">
+                                <ul role="errors-list" className="errors-list">
                                     {serverErrors.map((error) => {
                                         return (<li className="alert alert-danger" key={error}>{error}</li>);
                                     })}
