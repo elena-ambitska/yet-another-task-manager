@@ -44,7 +44,7 @@ const Register = () => {
 
     return (
         <article className="grid">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} role="form-submit">
                 <h2>Register</h2>
                 <div className="mb-3">
                     <label htmlFor="nameInput" className="form-label"> Name</label>
@@ -90,11 +90,12 @@ const Register = () => {
                            value={fields.retype}
                            className="form-control"
                            id="passwordConfirmInput"
+                           role="passwordInput"
                     />
                 </div>
                 <button className="btn btn-primary">Register</button>
             </form>
-            <ul className="errors-list">
+            <ul role="error-list" className="errors-list">
                 {serverErrors.map((error) => {
                     return (<li className="alert alert-danger" key={error.id}>{error.message}</li>);
                 })}

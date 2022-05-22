@@ -1,5 +1,6 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import React from 'react';
+
 import {
     Route,
     Routes,
@@ -37,10 +38,10 @@ const App = () => {
 
 const store = configureStore();
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(
     <Provider store={store}>
-        <App/>
-    </Provider>,
+        <App />
+    </Provider>
 
-    document.getElementById('app')
 );

@@ -32,7 +32,7 @@ function Login() {
     }
 
     return (<article className="grid">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} role="form-submit">
             <h1>Login</h1>
 
             <div className="mb-3">
@@ -65,7 +65,7 @@ function Login() {
             <button className="btn btn-primary">Login</button>
         </form>
 
-        <ul className="errors-list mt-2">
+        <ul role="error-list" className="errors-list mt-2">
             {serverErrors.map((error) => {
                 return (<li className="alert alert-danger" key={error.id}>{error.message}</li>);
             })}
