@@ -12,9 +12,13 @@ describe("test status services", () => {
         fetch.mockClear();
     });
 
+    const dispatchMock = () =>{
+        return {}
+    }
+
     it("should return status list", async () => {
-        const statusList = await statusService.getStatuses();
+        const statusList = await statusService.getStatuses(dispatchMock);
         expect(typeof statusList).toBe("object");
-        expect(statusList[0].title).toBe(statuses[0].title);
+        expect(statusList.title).toBe(statuses.title);
     });
 })
