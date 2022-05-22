@@ -1,6 +1,5 @@
 import React from "react";
 import Login from "../components/login";
-import toJson from "enzyme-to-json";
 import UserService from "../services/UserService";
 import resultLoginMock from "./mock/login";
 import resultLoginFailMock from "./mock/login_fail_400";

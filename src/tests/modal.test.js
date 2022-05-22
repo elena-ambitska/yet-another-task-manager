@@ -1,14 +1,14 @@
 import React from "react";
 import Modal from "../components/modal";
-import {shallow} from "enzyme";
-import toJson from "enzyme-to-json";
 import TaskService from "../services/TaskService";
-import createCardMockData from "./mock/createCard";
-import createCardMockFail from "./mock/createCard_fail_400";
 import updateCard from "./mock/updateCard";
 import StatusService from "../services/StatusService";
-
 import statuses from "./mock/statuses";
+import {renderWithContext} from "./render";
+
+import {act, fireEvent, screen} from "@testing-library/react";
+import createCard from "./mock/createCard";
+import createCard_fail_400 from "./mock/createCard_fail_400";
 
 
 const createCardMock = jest.spyOn(TaskService, "createCard");
@@ -23,60 +23,62 @@ beforeEach(() => {
     listStatusMock.mockReturnValueOnce(Promise.resolve(statuses));
 });
 
+const modalMock = (result) => {
+    return async (dispatch) => {
+        return Promise.resolve(result);
+    };
+};
+
+const setActiveMock = (active) => {
+
+};
+
 describe("Test Modal component", () => {
     it("should render modal component", () => {
-        const component = shallow(<Modal/>);
-        expect(toJson(component)).toMatchSnapshot();
+        renderWithContext(<Modal currentTask={{"id": 1541}}/>);
+        expect(screen.findByRole(/document/i)).not.toBeNull();
     });
 
     it("modal component sends data to services", async () => {
-        createCardMock.mockReturnValueOnce(Promise.resolve(createCardMockData));
+        createCardMock.mockReturnValueOnce(modalMock(createCard));
 
-        const component = shallow(<Modal currentTask={{}}/>);
-        await component
-            .find("form button[type='submit']")
-            .simulate("click", {
-                preventDefault() {
-                }
-            });
+        renderWithContext(<Modal active={true} setActive={setActiveMock} currentTask={{}}/>);
+
+        await act(() => {
+            fireEvent.click(screen.getByText(/Save changes/i));
+        })
 
         expect(createCardMock).toHaveBeenCalledTimes(1);
     });
 
     it("modal component displays error when fails", async () => {
-        createCardMock.mockReturnValueOnce(Promise.resolve(createCardMockFail));
+        createCardMock.mockReturnValueOnce(modalMock(createCard_fail_400));
 
-        const component = shallow(<Modal currentTask={{}}/>);
-        await component
-            .find("form button[type='submit']")
-            .simulate("click", {
-                preventDefault() {
-                }
-            });
+        renderWithContext(<Modal active={true} setActive={setActiveMock} currentTask={{}}/>);
+        await act(() => {
+            fireEvent.click(screen.getByText(/Save changes/i));
+        })
 
         expect(createCardMock).toHaveBeenCalledTimes(1);
 
-        const errorList = component.find(".errors-list");
-        expect(errorList.children.length).toBe(createCardMockFail.data.errors.title.length);
-        expect(errorList.childAt(0).text()).toContain(createCardMockFail.data.errors.title[0]);
+        const errorList = await screen.getByRole("errors-list");
+        expect(errorList.children.length).toBe(createCard_fail_400.data.errors.title.length);
+        expect(errorList.children[0]).toHaveTextContent("title must be defined.");
     });
 
     it("modal component put and update data to services", async () => {
-        updateCardMock.mockReturnValueOnce(Promise.resolve(updateCard));
+        updateCardMock.mockReturnValueOnce(modalMock(updateCard));
 
-        const component = shallow(<Modal currentTask={
+        renderWithContext(<Modal currentTask={
             {
                 id: 12,
                 title: "React",
                 description: "Hello"
-            }}
+            }} active={true} setActive={setActiveMock}
         />);
-        await component
-            .find("form button[type='submit']")
-            .simulate("click", {
-                preventDefault() {
-                }
-            });
+        await act(() => {
+            fireEvent.click(screen.getByText(/Save changes/i));
+        })
 
         expect(updateCardMock).toHaveBeenCalledTimes(1);
     });
@@ -85,24 +87,18 @@ describe("Test Modal component", () => {
     it("modal component closed on button clicked", async () => {
         const setActiveMock = jest.fn();
 
-        const component = shallow(<Modal currentTask={{}} setActive={setActiveMock} />);
-        await component
-            .find(".close")
-            .simulate("click", {
-                preventDefault() {}
-            });
+        renderWithContext(<Modal active={true} setActive={setActiveMock} currentTask={{}}/>);
 
-        await component
-            .find(".btn-secondary")
-            .simulate("click", {
-                preventDefault() {}
-            });
+        await act(() => {
+            fireEvent.click(screen.getByRole("close"));
+        })
+        await act(() => {
+            fireEvent.click(screen.getByRole("btn-secondary"));
+        })
 
-        await component
-            .find(".fade")
-            .simulate("click", {
-                preventDefault() {}
-            });
+        await act(() => {
+            fireEvent.click(screen.getByRole("dialog"));
+        })
 
         expect(setActiveMock).toHaveBeenCalledWith(false);
         expect(setActiveMock).toHaveBeenCalledTimes(3);
