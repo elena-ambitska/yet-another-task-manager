@@ -46,8 +46,6 @@ const Modal = ({active, setActive, currentTask}) => {
         promise.then((result) => {
             if (result.id) {
                 setActive(false);
-
-
             } else {
                 setServerErrors(Object.values(result.data.errors).flat());
             }
@@ -68,7 +66,7 @@ const Modal = ({active, setActive, currentTask}) => {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">{currentTask.id ? "Update card" : "Create card"}</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close"
+                        <button type="button" role="close" className="close" data-dismiss="modal" aria-label="Close"
                                 onClick={() => setActive(false)}>
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -115,7 +113,7 @@ const Modal = ({active, setActive, currentTask}) => {
                             <div className="modal-footer">
                                 <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes
                                 </button>
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal"
+                                <button type="button" className="btn btn-secondary"  role="btn-secondary" data-dismiss="modal"
                                         onClick={() => setActive(false)}>Close
                                 </button>
 
