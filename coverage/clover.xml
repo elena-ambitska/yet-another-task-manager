@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653251587357" clover="3.2.0">
-  <project timestamp="1653251587357" name="All files">
-    <metrics statements="31" coveredstatements="31" conditionals="6" coveredconditionals="3" methods="12" coveredmethods="12" elements="49" coveredelements="46" complexity="0" loc="31" ncloc="31" packages="3" files="10" classes="10"/>
+<coverage generated="1653290797643" clover="3.2.0">
+  <project timestamp="1653290797643" name="All files">
+    <metrics statements="20" coveredstatements="20" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="8" elements="30" coveredelements="29" complexity="0" loc="20" ncloc="20" packages="3" files="7" classes="7"/>
     <package name="redux.constants">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="taskConst.js" path="C:\Projects\pm-prj-2\src\redux\constants\taskConst.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-      </file>
-      <file name="userConsts.js" path="C:\Projects\pm-prj-2\src\redux\constants\userConsts.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
       </file>
     </package>
     <package name="services">
-      <metrics statements="26" coveredstatements="26" conditionals="6" coveredconditionals="3" methods="12" coveredmethods="12"/>
+      <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="8"/>
       <file name="TaskService.js" path="C:\Projects\pm-prj-2\src\services\TaskService.js">
         <metrics statements="16" coveredstatements="16" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="8"/>
         <line num="6" count="1" type="stmt"/>
@@ -37,19 +33,6 @@
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
       </file>
-      <file name="UserService.js" path="C:\Projects\pm-prj-2\src\services\UserService.js">
-        <metrics statements="10" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="4"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-      </file>
     </package>
     <package name="tests.mock">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -63,9 +46,6 @@
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
       <file name="getCardsFromService.js" path="C:\Projects\pm-prj-2\src\tests\mock\getCardsFromService.js">
-        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      </file>
-      <file name="login.js" path="C:\Projects\pm-prj-2\src\tests\mock\login.js">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
       <file name="updateCardService.js" path="C:\Projects\pm-prj-2\src\tests\mock\updateCardService.js">

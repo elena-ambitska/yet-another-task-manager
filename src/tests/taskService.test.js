@@ -45,11 +45,13 @@ describe("test task services", () => {
 
     it("should return update card", async () => {
         const id = 123;
+
         const updateTask = await TaskService.updateCard(id, {})((event) => {
             expect(event.type).toBe(UPDATE_TASK);
-            // expect(event.payload).toBe(data.id);
+            expect(event.payload).toBe(updateCardFromService);
         });
         expect(updateTask.title).toBe(updateCardFromService.title);
+        expect(updateTask.id).toBe(updateCardFromService.id);
     });
 
     it("should return delete card", async () => {
