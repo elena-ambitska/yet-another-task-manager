@@ -1,6 +1,5 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Modal from "./modal";
-import {ColumnList} from "./ColumnList/columnList.js";
 import TasksColumn from "./TasksColumn/TasksColumn.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import TaskService from "../services/TaskService";
@@ -24,16 +23,16 @@ export const Dashboard = () => {
     });
 
     const dispatch = useDispatch();
-    useEffect(async () => {
+    useEffect(() => {
+        console.log("render")
         dispatch(showLoader(true))
-        await TaskService.getCards(dispatch)
-        await StatusService.getStatuses(dispatch);
-        dispatch(showLoader(false))
+        Promise.all([TaskService.getCards(dispatch), StatusService.getStatuses(dispatch)]).then(() => {
+            dispatch(showLoader(false));
+        })
     }, [])
 
     return (
         <>
-
             <Modal active={modalActive}
                    setActive={setModalActive}
                    currentTask={currentTask}
@@ -47,7 +46,6 @@ export const Dashboard = () => {
                 }}>Create card</button>}
             </div>
             <div className="container-fluid pt-3">
-
                 <div className="row flex-row flex-sm-nowrap py-3">
                     {!loading ? statuses.map(({title, value}, index) =>
                         <TasksColumn
