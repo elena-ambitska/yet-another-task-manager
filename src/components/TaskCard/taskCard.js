@@ -1,11 +1,11 @@
-import React from "react";
+import React,{memo} from "react";
 import iconUpdate from "../../images/pencil-svgrepo-com.svg";
 import {convertTime} from "../../utils/time";
 import {useDispatch} from "react-redux";
 import TaskService from "../../services/TaskService";
 import {showModal} from "../../redux/actions/modActions";
 
-export const TaskCard = ({title, description, id, updateTime, status}) => {
+export const TaskCard = memo(({title, description, id, updateTime, status}) => {
 
     const dispatch = useDispatch();
     const deleteCard = (id) => {
@@ -26,10 +26,10 @@ export const TaskCard = ({title, description, id, updateTime, status}) => {
 
                 <p>Update task: {convertTime(updateTime)}</p>
                 <div className="wrapper-btn">
-                <button className="btn btn-warning" onClick={()=>dispatch(showModal({title, description, id, status }))}><img className="updateIcon" alt="pencil" src={iconUpdate} /></button>
-                <button className="btn btn-danger"  onClick={()=>deleteCard(id)}>X</button>
+                    <button className="btn btn-warning" onClick={()=>dispatch(showModal({title, description, id, status }))}><img className="updateIcon" alt="pencil" src={iconUpdate} /></button>
+                    <button className="btn btn-danger"  onClick={()=>deleteCard(id)}>X</button>
                 </div>
             </div>
         </div>
     )
-}
+})

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from "react";
+import React, {useEffect, memo} from "react";
 import Modal from "./modal";
 import TasksColumn from "./TasksColumn/TasksColumn.jsx";
 import {useDispatch, useSelector} from "react-redux";

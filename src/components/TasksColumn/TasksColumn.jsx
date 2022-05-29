@@ -2,8 +2,8 @@ import React, {memo} from 'react';
 import {useSelector} from "react-redux";
 import {TaskCard} from "../TaskCard/taskCard.js";
 
-const TasksColumn = memo(
-    ({title, type}) => {
+
+const TasksColumn = ({title, type}) => {
 
         const useGetTasksByType = (requestedStatus) => {
             const tasks = useSelector((state) => {
@@ -13,7 +13,7 @@ const TasksColumn = memo(
             return tasks.filter(({status}) => status === requestedStatus);
         }
         const tasks = useGetTasksByType(type);
-        console.log("render TaskColumn")
+        console.log("render TaskColumn", tasks)
 
         return (
             <>
@@ -41,7 +41,7 @@ const TasksColumn = memo(
             </>
         )
     }
-)
+
 
 
 export default TasksColumn;
