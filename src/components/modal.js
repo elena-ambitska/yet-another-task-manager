@@ -6,8 +6,10 @@ import TaskService from "../services/TaskService";
 
 
 import {useDispatch, useSelector} from "react-redux";
+import {wrapMapToPropsConstant} from "react-redux/es/connect/wrapMapToProps";
+import {hideModal} from "../redux/actions/modActions";
 
-const Modal = ({active, setActive, currentTask}) => {
+const Modal = () => {
     const [serverErrors, setServerErrors] = useState([]);
 
 
@@ -19,7 +21,18 @@ const Modal = ({active, setActive, currentTask}) => {
     const statuses = useSelector((state)=>{
         return state.statuses
     });
+
+    const currentTask = useSelector((state) =>{
+        return state.modal.currentTask
+    })
+
+    const active = useSelector((state) => {
+        return state.modal.active
+    })
+
+
     const dispatch = useDispatch();
+
 
     useEffect(() => {
         setFormFields({
@@ -45,7 +58,7 @@ const Modal = ({active, setActive, currentTask}) => {
         }
         promise.then((result) => {
             if (result.id) {
-                setActive(false);
+                dispatch(hideModal())
             } else {
                 setServerErrors(Object.values(result.data.errors).flat());
             }
@@ -59,7 +72,7 @@ const Modal = ({active, setActive, currentTask}) => {
              tabIndex="-1"
              role="dialog"
              onClick={(e) => {
-                 setActive(false)}}>
+                 dispatch(hideModal())}}>
 
             <div className="modal-dialog" role="document"
                  onClick={(e) => e.stopPropagation()}>
@@ -67,7 +80,7 @@ const Modal = ({active, setActive, currentTask}) => {
                     <div className="modal-header">
                         <h5 className="modal-title">{currentTask.id ? "Update card" : "Create card"}</h5>
                         <button type="button" role="close" className="close" data-dismiss="modal" aria-label="Close"
-                                onClick={() => setActive(false)}>
+                                onClick={() =>  dispatch(hideModal())}>
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -114,7 +127,7 @@ const Modal = ({active, setActive, currentTask}) => {
                                 <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes
                                 </button>
                                 <button type="button" className="btn btn-secondary"  role="btn-secondary" data-dismiss="modal"
-                                        onClick={() => setActive(false)}>Close
+                                        onClick={() =>   dispatch(hideModal())}>Close
                                 </button>
 
                                 <ul role="errors-list" className="errors-list">
