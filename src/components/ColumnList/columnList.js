@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import TasksColumn from "../TasksColumn/TasksColumn.jsx";
 import {useSelector} from "react-redux";
 
@@ -8,6 +8,7 @@ export const ColumnList = () => {
         return state.statuses
     });
 
+ 
     return (
         statuses.map( ({title, value},index) =>
              <TasksColumn
