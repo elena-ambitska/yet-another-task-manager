@@ -4,7 +4,7 @@ class BaseService {
     #domain = 'https://radiant-temple-07706.herokuapp.com/';
 
     getHeaders(withAuth=true) {
-        const user = window.user;
+        const user = JSON.parse(window.localStorage.getItem('user')) ?? null;
 
         const headers = {
             'Content-Type': 'application/json',
